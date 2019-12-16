@@ -114,3 +114,13 @@ Start time: 10:15am
 Finish time: 12:03pm
 
 Actual time needed to complete: 105 minutes
+
+Feature 9: Movies
+
+Estimate of time needed to complete: 40 minutes
+
+Start time: 8:15pm
+
+Finish time: 12:03pm
+
+Actual time needed to complete: 105 minutes
