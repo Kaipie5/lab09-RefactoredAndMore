@@ -32,32 +32,39 @@ let currentCity = "";
 app.get('/', (request, response) => {
     console.log("HELLLOOOOOOOO")
     response.send("Hello from the back side");
-    // console.log(city);
-    // let locationObj = searchLatToLong(city);
-    // responseObj = {
-    //     "search_query": city,
-    //     "formatted_query": city,
-    //     "latitude": locationObj.latitude,
-    //     "longitude": locationObj.longitude
-    // }
 })
-
-
 
 app.get('/location', (request, response) => {
     console.log(" ALSO HELLOOOOOO")
-    
-
     try{  
         createResponseObjLocation(request, response);      
     }
     catch(error){
         console.error(error); // will turn the error message red if the environment supports it
-
         response.status(500).send('Sorry something went wrong');
     }
+})
 
-    
+app.get('/weather', (request, response) => {
+    console.log(" Weather HELLOOOOOO")
+    try{  
+        createResponseObjWeather(request, response);      
+    }
+    catch(error){
+        console.error(error); // will turn the error message red if the environment supports it
+        response.status(500).send('Sorry something went wrong');
+    }
+})
+
+app.get('/events', (request, response) => {
+    console.log("Event HELLOOOOO")
+    try{  
+        createResponseObjEvent(request, response);      
+    }
+    catch(error){
+        console.error(error); // will turn the error message red if the environment supports it
+        response.status(500).send('Sorry something went wrong');
+    }  
 })
 
 function createResponseObjLocation(request, response) {
@@ -104,32 +111,7 @@ function createResponseObjLocation(request, response) {
             });
         } 
     })
-
-    
-
-    
 }
-
-app.get('/weather', (request, response) => {
-
-    console.log(" Weather HELLOOOOOO")
-    // console.log(request)
-
-    try{
-        
-    
-        createResponseObjWeather(request, response);
-    
-        
-    }
-    catch(error){
-        console.error(error); // will turn the error message red if the environment supports it
-
-        response.status(500).send('Sorry something went wrong');
-    }
-    
-
-})
 
 function createResponseObjWeather(request, response) {
     // const weatherData = require('./data/darksky.json');
@@ -153,20 +135,7 @@ function createResponseObjWeather(request, response) {
 
 }
 
-app.get('/events', (request, response) => {
-    console.log("Event HELLOOOOO")
 
-    try{  
-        createResponseObjEvent(request, response);      
-    }
-    catch(error){
-        console.error(error); // will turn the error message red if the environment supports it
-
-        response.status(500).send('Sorry something went wrong');
-    }
-
-    
-})
 
 function createResponseObjEvent(request, response) {
     // const geoData = require('./data/geo.json');
@@ -215,7 +184,17 @@ client.connect()
 })
   .catch((err) => console.error(err));
 
-function Location(city, formattedAddress, latitude, longitude){
+  function insertLocation(location) {
+
+    console.log(location)
+    let sql = 'INSERT INTO city_explorer (city_name, formatted_query, latitude, longitude) VALUES ($1, $2, $3, $4);';
+    let safeValues = [location.search_query, location.formatted_query, location.latitude, location.longitude];
+
+    client.query(sql, safeValues)
+
+  }
+
+  function Location(city, formattedAddress, latitude, longitude){
     this.search_query = city;
     this.formatted_query = formattedAddress;
     this.latitude = latitude;
@@ -233,25 +212,4 @@ function Location(city, formattedAddress, latitude, longitude){
       this.name = name
       this.event_date = event_date
       this.summary = summary
-  }
-
-  app.get('/add', (request, response) =>{
-      
-  })
-
-  function checkDatabase(cityName) {
-    //   console.log(cityName)
-    
-    // if (client.query(sql, safeValues) 
-  }
-
-  function insertLocation(location) {
-
-    console.log(location)
-    // let sql = 'INSERT INTO city_explorer (city_name, formatted_query, latitude, longitude) VALUES ('seattle', 'seattle', '47', '-122')'
-    let sql = 'INSERT INTO city_explorer (city_name, formatted_query, latitude, longitude) VALUES ($1, $2, $3, $4);';
-    let safeValues = [location.search_query, location.formatted_query, location.latitude, location.longitude];
-
-    client.query(sql, safeValues)
-
   }
