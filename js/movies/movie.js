@@ -1,3 +1,5 @@
+'use strict';
+
 function Movie(title, overview, average_votes, total_votes, image_url, popularity, released_on) {
     this.title = title;
     this.overview = overview;
@@ -7,3 +9,5 @@ function Movie(title, overview, average_votes, total_votes, image_url, popularit
     this.popularity = popularity;
     this.released_on = released_on;   
 }
+
+module.exports = Movie;

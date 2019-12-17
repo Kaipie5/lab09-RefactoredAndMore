@@ -124,3 +124,23 @@ Start time: 8:15pm
 Finish time: 12:03pm
 
 Actual time needed to complete: 105 minutes
+
+Feature 9: Yelp
+
+Estimate of time needed to complete: 40 minutes
+
+Start time: 7:15pm
+
+Finish time: 9:15pm
+
+Actual time needed to complete: 120 minutes
+
+Feature 9: Refactor
+
+Estimate of time needed to complete: 40 minutes
+
+Start time: 7:15pm
+
+Finish time: 9:15pm
+
+Actual time needed to complete: 120 minutes

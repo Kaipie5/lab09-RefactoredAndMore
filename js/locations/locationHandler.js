@@ -1,4 +1,15 @@
-function createResponseObjLocation(request, response) {
+'use strict';
+
+const superagent = require('superagent');
+
+const client = require('../../js/client');
+const Location = require('./Location');
+
+let currentCity;
+let currentLat;
+let currentLng; 
+
+function locationHandler(request, response) {
     // const geoData = require('./data/geo.json');
     const city = request.query.data;
     // console.log(city)
@@ -13,17 +24,19 @@ function createResponseObjLocation(request, response) {
         if (results.rowCount > 0) {
             let row = results.rows[0]
             locationObj = new Location(row.city_name, row.formatted_query, row.latitude, row.longitude);
-             
         } else {
             locationObj = ""
         }
 
         if (locationObj != "") {
             console.log(locationObj)
+            currentLat = locationObj.latitude
+            currentLng = locationObj.longitude
+            currentCity = city
             response.send(locationObj)
         } else {
             let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${process.env.GEOCODE_API_KEY}`;
-    
+            console.log(url)
             superagent.get(url)
                 .then(results => {
                     // console.log(results.body.results[0])
@@ -39,9 +52,11 @@ function createResponseObjLocation(request, response) {
                     // console.log("RESPONSE LOCATION", locationObj);
                     response.send(locationObj);
                     
-            });
+            })
+            .catch(error => console.error(error));
         } 
     })
+    
 }
 
 function insertLocation(location) {
@@ -52,4 +67,6 @@ function insertLocation(location) {
 
     client.query(sql, safeValues)
 
-  }
+}
+module.exports = locationHandler;
+
