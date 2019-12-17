@@ -3,7 +3,7 @@
 const superagent = require('superagent');
 
 const client = require('../../js/client');
-const Weather = require('./Weather');
+const Weather = require('./weather');
 
 function weatherHandler(request, response) {
     // const weatherData = require('./data/darksky.json');

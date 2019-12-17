@@ -3,7 +3,7 @@
 const superagent = require('superagent');
 
 const client = require('../../js/client');
-const Movie = require('./Movie');
+const Movie = require('./movie');
 
 function movieHandler(request, response) {
     // const geoData = require('./data/geo.json');

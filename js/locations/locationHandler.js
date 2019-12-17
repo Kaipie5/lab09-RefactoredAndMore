@@ -3,7 +3,7 @@
 const superagent = require('superagent');
 
 const client = require('../../js/client');
-const Location = require('./Location');
+const Location = require('./location');
 
 let currentCity;
 let currentLat;

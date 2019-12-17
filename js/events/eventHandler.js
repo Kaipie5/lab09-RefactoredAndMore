@@ -4,7 +4,7 @@
 const superagent = require('superagent');
 
 const client = require('../../js/client');
-const Event = require('./Event');
+const Event = require('./event');
 const locationHandler = require('../locations/locationHandler');
 
 function eventHandler(request, response) {

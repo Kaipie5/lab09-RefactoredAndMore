@@ -3,7 +3,7 @@
 const superagent = require('superagent');
 
 const client = require('../../js/client');
-const Yelp = require('./Yelp');
+const Yelp = require('./yelp');
 
 function yelpHandler(request, response) {  
 
