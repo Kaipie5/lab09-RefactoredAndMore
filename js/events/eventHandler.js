@@ -1,9 +1,17 @@
-function createResponseObjEvent(request, response) {
+'use strict';
+
+// allows us to get real data
+const superagent = require('superagent');
+
+const client = require('../../js/client');
+const Event = require('./Event');
+const locationHandler = require('../locations/locationHandler');
+
+function eventHandler(request, response) {
     // const geoData = require('./data/geo.json');
     // const city = request.query.data;
     // console.log(city)
-
-    let url = `http://api.eventful.com/rest/events/search?app_key=${process.env.EVENTFUL_API_KEY}&location=${currentCity}&date=Future`;
+    let url = `http://api.eventful.com/rest/events/search?app_key=${process.env.EVENTFUL_API_KEY}&location=${request.query.data.search_query}&date=Future`;
     console.log("URL", url)
     const jsdom = require("jsdom");
     
@@ -35,5 +43,8 @@ function createResponseObjEvent(request, response) {
         response.send(eventsArray);
         
     
-    });
+    })
+    .catch(error => console.error(error));
 }
+
+module.exports = eventHandler;
